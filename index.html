@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .floating-button { 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px; 
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .chat-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .messages {
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 400px;
+            flex: 1;
+        }
+        .input-area {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0;
+        }
+        .input-area button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="floating-button" onclick="toggleChat()">Chat</button>
+    <div class="chat-container" id="chatContainer">
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+            const newMessage = document.createElement('div');
+            newMessage.textContent = input.value;
+            messages.appendChild(newMessage);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
+        }
+    </script>
+</body>
+</html>
